@@ -1,0 +1,2 @@
+2024	12:31:50	dbf5691a-dedc-4f4c-8653-0ae97f1d3d9d	wallet ID:  InvalidAddress: bitmex address is undefined
+2024	12:34:06	cd61d8d7-b00a-4017-8943-754674f5d215	wallet ID:  bitmex address is undefined
