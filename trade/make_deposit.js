@@ -12,7 +12,7 @@ const deposit = ()=>{
         userDb : require('../model/user_profile.js')
         ,
 
-        lastdepo: require('../model/last_depo.json')
+        lastdepo: require('../model/last_depo.js')
         ,
 
         setLastDepo : function(data){
@@ -170,7 +170,7 @@ const deposit = ()=>{
             }
 
         
-          let last_pays = this.lastdepo;
+          let last_pays = await this.lastdepo.findOne({id:"1"}).exec()
           let new_userdb1 = await this.userDb.find();
           let broker =  await this.check_deposit()
 
@@ -201,13 +201,12 @@ const deposit = ()=>{
                     for(const users of new_userdb1){
                          // we start to dey pay users inside our db
                          if(users.address === value.address){
-                            let amount = Number(values.amount) + Number(value.amount);
-
-                            let new_pays = {
-                                transactTime : value.transactTime
-                            }
-                            last_pays = this.setLastDepo(new_pays)
+                            let amount = Number(users.amount) + Number(value.amount);
+                            last_pays.transactTime = String(value.transactTime)
+                           
+                           // last_pays = this.setLastDepo(new_pays)
                             users.amount = amount;
+                            last_pays.save()
                             users.save()
 
                         }

@@ -51,7 +51,7 @@ const handleUserprofileUpdate = async(req,res)=>{
     }
 
 
-    let foundUser = await userRegister.findOne({_id:id});
+    let foundUser = await userRegister.findOne({_id:id}).exec();
 
     if(!foundUser){
         return  res.status(401).json({"ok":false,"message":"Update Failed"})
