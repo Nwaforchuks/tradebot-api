@@ -376,7 +376,7 @@ const check_Market =  ( )=>{
 
        // const mark = connect_Markert();
         const depo = deopist();
-      //  await depo.credit_user(); // credit users from thier deposit on wallet
+        await depo.credit_user(); // credit users from thier deposit on wallet
           await mark.connect_btc();
           await mark.connect_eth();
 
