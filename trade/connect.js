@@ -134,7 +134,7 @@ return {
 
      let btcCandle = undefined;
      try{
-      btcCandle = await oneTrading.fetchOHLCV("BTC/USDT", '1h',this.since,this.limit);
+      btcCandle = await oneTrading.fetchOHLCV("BTC/USDT", '15m',this.since,this.limit);
      }catch(err){
       console.log(err)
      }
@@ -166,7 +166,9 @@ return {
         
          if(await depo.check_trade_amount("btc") <= depo.getBalance() && await depo.check_trade_amount("btc") > 0){
 
-            let areadyBuy = require('../model/markertData.json')
+            let areadyBuy1 = require('../model/markertData.js')
+
+            let areadyBuy = await areadyBuy1.findOne({id:"1"}).exec()
 
          if(areadyBuy.btcOnBuy == false){
 
@@ -177,11 +179,12 @@ return {
             depo.orderCrypto("BTC/USDT",'buy',await mark.getVolume("BTC/USDT",await depo.check_trade_amount("btc")),await depo.check_trade_amount("btc"));
            
             console.log("we are buying btc")
+             areadyBuy.save();
 
-            await fs.writeFile(
-               path.join(__dirname,'..','model','markertData.json'),
-               JSON.stringify(areadyBuy)
-           );
+         //    await fs.writeFile(
+         //       path.join(__dirname,'..','model','markertData.json'),
+         //       JSON.stringify(areadyBuy)
+         //   );
 
          }else{
 
@@ -193,10 +196,12 @@ return {
             await depo.payPercent(depo.clientGain(areadyBuy.btcBuy,await mark.getCrypoPrice("BTC/USDT",areadyBuy.btcSell)),"btc");
            // na here we pay client thier gain
             
-            await fs.writeFile(
-               path.join(__dirname,'..','model','markertData.json'),
-               JSON.stringify(areadyBuy)
-           );
+         //    await fs.writeFile(
+         //       path.join(__dirname,'..','model','markertData.json'),
+         //       JSON.stringify(areadyBuy)
+         //   );
+
+          areadyBuy.save();
          }
  
          }
@@ -208,7 +213,8 @@ return {
 
 
       }else if(await this.sell(close)){
-         let areadyBuy = require('../model/markertData.json')
+         let areadyBuy1 = require('../model/markertData.js')
+         let areadyBuy = await areadyBuy1.findOne({id:"1"}).exec();
          console.log("we are selling btc")
 
          if(areadyBuy.btcOnBuy == true){
@@ -218,10 +224,12 @@ return {
             await depo.orderCrypto("BTC/USDT",'sell',areadyBuy.btcSell,await mark.getCrypoPrice("BTC/USDT",areadyBuy.btcSell));
             await depo.payPercent(depo.clientGain(areadyBuy.btcBuy,await mark.getCrypoPrice("BTC/USDT",areadyBuy.btcSell)),"btc");
    
-            await fs.writeFile(
-               path.join(__dirname,'..','model','markertData.json'),
-               JSON.stringify(areadyBuy)
-           );
+         //    await fs.writeFile(
+         //       path.join(__dirname,'..','model','markertData.json'),
+         //       JSON.stringify(areadyBuy)
+         //   );
+
+          areadyBuy.save();
          }
 
 
@@ -245,7 +253,7 @@ return {
    let btcCandle = undefined;
 
    try{
-      btcCandle = await oneTrading.fetchOHLCV("ETH/USDT", '1h',this.since,this.limit);
+      btcCandle = await oneTrading.fetchOHLCV("ETH/USDT", '15m',this.since,this.limit);
    }catch(err){
       console.log(err)
    }
@@ -276,7 +284,8 @@ console.log(await depo.check_trade_amount("eth"))
          
          if(await depo.check_trade_amount("eth") <= depo.getBalance() && await depo.check_trade_amount("eth") > 0){
 
-            let areadyBuy = require('../model/markertData.json')
+            let areadyBuy1 = require('../model/markertData.js')
+            let areadyBuy = areadyBuy1.findOne({id:"1"}).exec()
 
          if(areadyBuy.ethOnBuy == false){
 
@@ -288,10 +297,12 @@ console.log(await depo.check_trade_amount("eth"))
            
             console.log("we are buying eth")
 
-            await fs.writeFile(
-               path.join(__dirname,'..','model','markertData.json'),
-               JSON.stringify(areadyBuy)
-           );
+         //    await fs.writeFile(
+         //       path.join(__dirname,'..','model','markertData.json'),
+         //       JSON.stringify(areadyBuy)
+         //   );
+
+            areadyBuy.save();
 
          }else{
 
@@ -301,10 +312,12 @@ console.log(await depo.check_trade_amount("eth"))
             areadyBuy.ethOnBuy = false;
             await depo.orderCrypto("ETH/USDT",'sell',areadyBuy.ethSell,await mark.getCrypoPrice("ETH/USDT",areadyBuy.ethSell));
             await depo.payPercent(depo.clientGain(areadyBuy.ethBuy,await mark.getCrypoPrice("ETH/USDT",areadyBuy.ethSell)),"eth");
-            await fs.writeFile(
-               path.join(__dirname,'..','model','markertData.json'),
-               JSON.stringify(areadyBuy)
-           );
+         //    await fs.writeFile(
+         //       path.join(__dirname,'..','model','markertData.json'),
+         //       JSON.stringify(areadyBuy)
+         //   );
+
+         areadyBuy.save();
          }
  
          }
@@ -315,8 +328,9 @@ console.log(await depo.check_trade_amount("eth"))
       
 
 
-      }else if(await this.sell(close)){
-         let areadyBuy = require('../model/markertData.json')
+        }else if(await this.sell(close)){
+         let areadyBuy1 = require('../model/markertData.js')
+         let areadyBuy = areadyBuy1.findOne({id:"1"}).exec();
          console.log("we are selling eth")
 
          if(areadyBuy.ethOnBuy == true){
@@ -327,10 +341,11 @@ console.log(await depo.check_trade_amount("eth"))
             await depo.orderCrypto("ETH/USDT",'sell',areadyBuy.ethSell,await mark.getCrypoPrice("ETH/USDT",areadyBuy.ethSell));
             await depo.payPercent(depo.clientGain(areadyBuy.ethBuy,await mark.getCrypoPrice("ETH/USDT",areadyBuy.ethSell)),"eth");
    
-            await fs.writeFile(
-               path.join(__dirname,'..','model','markertData.json'),
-               JSON.stringify(areadyBuy)
-           );
+         //    await fs.writeFile(
+         //       path.join(__dirname,'..','model','markertData.json'),
+         //       JSON.stringify(areadyBuy)
+         //   );
+          areadyBuy.save();
          }
        
 
@@ -362,8 +377,8 @@ const check_Market =  ( )=>{
        // const mark = connect_Markert();
         const depo = deopist();
       //  await depo.credit_user(); // credit users from thier deposit on wallet
-      //  await mark.connect_btc();
-      //  await mark.connect_eth();
+          await mark.connect_btc();
+          await mark.connect_eth();
 
      
     // await depo.payPercent(depo.clientGain(120,100),"btc");
@@ -371,7 +386,7 @@ const check_Market =  ( )=>{
    }
    );
 
-   const job = new SimpleIntervalJob({hours : 1}, task,options = {});
+   const job = new SimpleIntervalJob({minutes : 14}, task,options = {});
 
    scheduler.addSimpleIntervalJob(job);
 }

@@ -14,5 +14,5 @@ const lastdepo = new Scheme({
     }
 })
 
-module.exports = mongoose.model('lastdepo',lastdepo);
+module.exports = mongoose.model('Lastdepo',lastdepo);
 
