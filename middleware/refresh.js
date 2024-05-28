@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const handleRefresh = async (req,res,next)=>{
     let token  = "";
 
-    if(req.query.token != null){
+    if(req.query.token){
        token = req.query.token.token
     }else{
        token = req.body.token.token;
