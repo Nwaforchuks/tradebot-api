@@ -6,7 +6,8 @@ const handleRefresh = async (req,res,next)=>{
 
     if(req.query.token){
        token = req.query.token.token
-    }else if(req.body.token.token){
+    }else if(req.body.token){
+
        token = req.body.token.token;
      }
 
