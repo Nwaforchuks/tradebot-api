@@ -2,6 +2,7 @@ var ccxt = require('ccxt')
 const deopist = require('./make_deposit')
 const hasHeadAndShoulder = require('slz-indicators/dist/index').hasHeadAndShoulder;
 const hasInverseHeadAndShoulder = require('slz-indicators/dist/index').hasInverseHeadAndShoulder;
+const shedule = require('node-schedule')
 
 const fs = require('fs').promises;
 const path = require('path');
@@ -367,28 +368,18 @@ console.log(await depo.check_trade_amount("eth"))
 
 
 const check_Market =  ( )=>{
-   const{ToadScheduler,SimpleIntervalJob,Task} = require('toad-scheduler');
 
-   const scheduler = new ToadScheduler();
 
-   const task = new Task('checking trade',
-   async ()=>{
-
-        const mark = connect_Markert();
-        const depo = deopist();
-        await depo.credit_user(); // credit users from thier deposit on wallet
+   const jobs = shedule.scheduleJob('*/5 * * * *', async ()=>{
+      console.log('runining')
+           const mark = connect_Markert();
+          const depo = deopist();
+          await depo.credit_user(); // credit users from thier deposit on wallet
           await mark.connect_btc();
           await mark.connect_eth();
-
-     
-    // await depo.payPercent(depo.clientGain(120,100),"btc");
-
    }
-   );
+   )
 
-   const job = new SimpleIntervalJob({minutes : 5}, task,options = {});
-
-   scheduler.addSimpleIntervalJob(job);
 }
 
 const time_Call = async ()=>{
