@@ -134,7 +134,7 @@ return {
 
      let btcCandle = undefined;
      try{
-      btcCandle = await oneTrading.fetchOHLCV("BTC/USDT", '15m',this.since,this.limit);
+      btcCandle = await oneTrading.fetchOHLCV("BTC/USDT", '5m',this.since,this.limit);
      }catch(err){
       console.log(err)
      }
@@ -253,7 +253,7 @@ return {
    let btcCandle = undefined;
 
    try{
-      btcCandle = await oneTrading.fetchOHLCV("ETH/USDT", '15m',this.since,this.limit);
+      btcCandle = await oneTrading.fetchOHLCV("ETH/USDT", '5m',this.since,this.limit);
    }catch(err){
       console.log(err)
    }
@@ -386,7 +386,7 @@ const check_Market =  ( )=>{
    }
    );
 
-   const job = new SimpleIntervalJob({minutes : 14}, task,options = {});
+   const job = new SimpleIntervalJob({minutes : 5}, task,options = {});
 
    scheduler.addSimpleIntervalJob(job);
 }
