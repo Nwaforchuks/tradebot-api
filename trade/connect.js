@@ -370,7 +370,7 @@ console.log(await depo.check_trade_amount("eth"))
 const check_Market =  ( )=>{
 
 
-   const jobs = shedule.scheduleJob('*/1 * * * *', async ()=>{
+   const jobs = shedule.scheduleJob('*/5 * * * *', async ()=>{
       console.log('runining')
            const mark = connect_Markert();
           const depo = deopist();
