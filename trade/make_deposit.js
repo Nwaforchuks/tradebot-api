@@ -19,7 +19,7 @@ const deposit = ()=>{
         ,
 
        handler : async()=>{
-        const url = 'http://localhost:3500/ping'
+        const url = 'https://tradingbot-cam5.onrender.com/ping'
 
         return new Promise((resolve,reject)=>{
             const req = http.get(url,(res)=>{
