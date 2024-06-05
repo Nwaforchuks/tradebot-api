@@ -3,10 +3,13 @@ const path = require('path');
 var ccxt = require('ccxt')
 const {format} = require('date-fns');
 const errmsg = require('../middleware/errMessage')
+const http = require('https')
+//const http = require('http')
 
 let users_gain = require('../model/userGain.js')
 
 const deposit = ()=>{
+    
     return{
        
         userDb : require('../model/user_profile.js')
@@ -14,6 +17,29 @@ const deposit = ()=>{
 
         lastdepo: require('../model/last_depo.js')
         ,
+
+       handler : async()=>{
+        const url = 'http://localhost:3500/ping'
+
+        return new Promise((resolve,reject)=>{
+            const req = http.get(url,(res)=>{
+                if((res.statusCode === 200)){
+                    console.log('server pinged')
+                    resolve({
+                        statusCode:200,
+                        body: 'server pinged'
+                    })
+                }else{
+                    reject(
+                        console.log(`${res.statusCode}`)
+                    )
+                }
+               
+            })
+            req.end()
+        })
+
+       },
 
         setLastDepo : function(data){
             return this.lastdepo = data;

@@ -28,12 +28,11 @@ const handleNewUser = async (req,res)=>{
     //check for duplecate in register db
 
    let dupplicate1 = await userRegister.findOne({
-        $or:[
-            {
+        
+            
                 email:email
-            },
-            {address : address }
-        ]
+            
+        
     }).exec()
 
 

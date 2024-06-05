@@ -27,11 +27,13 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use('/ping',require('./routes/api/ping'))
 app.use('/register',require('./routes/api/newUser'))
 app.use('/forget',require('./routes/api/forgetPass'))
 app.use('/comfarm',require('./routes/api/comfarm'))
 app.use('/login',require('./routes/api/login'))
 app.use('/logout',require('./routes/api/logout'))
+app.use('/fetchdata',require('./routes/api/fetchdata'))
 app.use(handleRefresh);
 
 app.use(verifyJwt)
@@ -41,6 +43,7 @@ app.use('/getuserprofile',require('./routes/api/userProfile'))
 app.use('/getuseraccount',require('./routes/api/userAccount'))
 app.use('/usergain',require('./routes/api/getGain'))
 app.use('/userresetpassword',require('./routes/api/resetPassword'))
+app.use('/updateaddress',require('./routes/api/updateadress'))
 
 
 app.use(errorHandler);
