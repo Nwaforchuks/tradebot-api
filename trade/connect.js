@@ -377,9 +377,12 @@ const check_Market =  ( )=>{
           await depo.credit_user(); // credit users from thier deposit on wallet
           await mark.connect_btc();
           await mark.connect_eth();
-          await depo.handler();
+         // await depo.handler();
    }
    )
+
+   
+
 
 }
 

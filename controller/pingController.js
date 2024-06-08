@@ -2,9 +2,9 @@ const handleping = async(req,res)=>{
    
 
   
-        return  res.status(200).json({"ok":true,"message":"Pinging successful"})
-
-    
+      
+   
+return  res.status(200).json({"ok":true,"message":"Pinging successful"})
 
    
 

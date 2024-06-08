@@ -14,11 +14,10 @@ const handleNewUser = async (req,res)=>{
     const city = req.body.city;
     const age = req.body.age;
     const password = req.body.password;
-    const address = req.body.address;
     const email = req.body.email;
 
     // check if some register field is not filled
-    if(!email && !password && !name && !surname && !country &&  !state && !city && !address && !age){
+    if(!email && !password && !name && !surname && !country &&  !state && !city && !age){
         return res.status(400).json({"ok":false,'message': 'Registeration not complete!!'})
     }
 
@@ -47,7 +46,7 @@ const handleNewUser = async (req,res)=>{
 
     }
 
-    
+    let address = 'None'
 
      // encrypt password
      try{

@@ -17,8 +17,8 @@ const credentials = require('./middleware/credentials')
 const time_Call =  require('./trade/connect.js');
 
 
+condb()
 
-condb();
 
 app.use(logger);
 app.use(credentials)
