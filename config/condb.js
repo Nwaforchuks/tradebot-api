@@ -7,7 +7,7 @@ const get_Data =  ()=>{
    
 
 }
-//get_Data();
+get_Data();
 const connectDb = async()=>{
     try{
          await mongoose.connect(process.env.userdb,{
