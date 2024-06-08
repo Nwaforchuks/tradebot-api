@@ -338,7 +338,7 @@ const deposit = ()=>{
                         }
                         let pay = amount1 - credit;
                         value.amount = value.amount + pay;
-                        let gain = await users_gain.findOne({address:value.address} ).exec();
+                        let gain = await users_gain.findOne({email:value.email} ).exec();
 
                         if(gain.gain.length > 7){
                             gain.gain.$shift()

@@ -74,7 +74,7 @@ const handleNewUser = async (req,res)=>{
 
        })
 
-       let find = await userRegister.findOne( {address:address});
+       let find = await userRegister.findOne( {email:email});
 
        let id = find._id.toString();
 
