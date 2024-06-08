@@ -1,9 +1,28 @@
-const { getCryptoRate } = require('crypto-exchange-rates');
+const { getCryptoPrices } = require("crypto-price-fetcher");
 const handlecrypto = async (req,res)=>{
     try{
-        let btc = await getCryptoRate('BTCUSDT')
+        const symbols = ['BTCUSDT', 'ETHUSDT'];
+        let btc = ''
+        let eth = ''
+        // Call the function to get cryptocurrency prices
+       
+        
+        let price = await  getCryptoPrices(symbols);
 
-        let eth = await getCryptoRate('ETHUSDT')
+         Object.entries(price).forEach(([symbol, data]) => {
+            
+              if(symbol === "BTCUSDT"){
+                btc = `${data.lastPrice}`;
+
+              }else if (symbol === "ETHUSDT"){
+                eth = `${data.lastPrice}`;
+
+              }
+             
+             
+            })
+
+       
 
         let crypto = {
             btc,eth
